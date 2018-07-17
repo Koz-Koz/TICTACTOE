@@ -8,7 +8,7 @@ require "pry"
 class BoardCase
 
   attr_accessor :sign, :position
-  #TO DO : la classe a 2 attr_accessor, sa valeur (X, O, ou vide), ainsi que son numéro de case)
+  # sign = (X, O, ou vide), position = son numéro de case
 
   def initialize position, sign = ''
     #TO DO doit régler sa valeur, ainsi que son numéro de case
@@ -39,10 +39,6 @@ class Board
     @boardcases = Array.new(9)
     @boardcases.each_with_index{ |_, i| @boardcases[i] = BoardCase.new(i, '') }         #_ est la cellule du tab. et le i = index
 
-    # boardcases = [ BoardCase.new(0, ''), BoardCase.new, BoardCase.new, BoardCase.new, BoardCase.new, BoardCase.new, BoardCase.new, BoardCase.new, BoardCase.new]
-    # boardcases[0] == BoardCase.new(0, '')
-    # boardcases[0].position ==> 0
-    # boardcases[0].sign ==> ''
   end
 
   def to_s
@@ -67,13 +63,6 @@ class Board
     winning_positions << [0, 3, 6] << [1, 4, 7] << [2, 5, 8]
     #diagonals
     winning_positions << [0, 4, 8] << [2, 4, 6]
-
-
-    # winning_positions[0]
-    # ==> [0, 1, 2]
-    # winning_positions[0][0].sign
-    # winning_positions[0][1]
-    # winning_positions[0][2]
 
     winning_positions.each do |wp|
       # ['X', 'X', 'X']
@@ -123,8 +112,8 @@ end
 class Game
   attr_reader :player_1, :player_2, :board
 
-  def initialize(required_input = {})                         #PCréation du board passé en paramétre. Dépendance injection = dependant d'une class pour fonctionner
-    #TO DO : créé 2 joueurs, créé un board
+  def initialize(required_input = {})                         
+    # créér 2 joueurs, créé un board
     # les classes sont passées en paramètre pour réduire les dépendances de classe (dependency injection)
     # Les paramêtres sont nommés (hash avec clé) pour ne plus dépendre de l'ordonnancement (l'ordre)
 
@@ -153,7 +142,7 @@ class Game
   end
 
   def turn
-    #TO DO : affiche le plateau, demande au joueur il joue quoi, vérifie si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie
+    # Afficher le plateau, demander au joueur il joue quoi, vérifier si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie
     board.to_s
     @active_player = (@active_player == player_1 ? player_2 : player_1)
     puts "#{@active_player.first_name}, entrez un nombre entre 1 et 9"
